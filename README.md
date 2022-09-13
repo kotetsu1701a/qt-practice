@@ -6,7 +6,8 @@ These programs were developed using Qt Creator. They were created as an exercise
 There is a binary file, please run it.
 
 ## Modification
-Qt Creator is required.
+Qt Creator is required.<br>
+project filename = CMakeLists.txt
 
 ## License
 GNU General Public License V3
