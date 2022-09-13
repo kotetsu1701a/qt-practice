@@ -3,6 +3,8 @@
 #include <QMessageBox>
 
 double getJulianDay(int year, int month, int day)
+// マイコン天文学Ⅰ（恒星社厚生閣 1983 中野主一著）
+// 20-21頁 式 2-1-1,2-1-2,2-1-3
 {
     double julian = 0.0;
     double branch;
@@ -31,6 +33,8 @@ double getJulianDay(int year, int month, int day)
 }
 
 void getJulanToDateTime(int dtime[], double julian, bool opt)
+//　マイコン宇宙講座（廣済堂 1980 中野主一著）
+// 35頁 サブルーチンJDATE リスト2-2
 {
     int month_date[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     double temp_julian, julian_day;
