@@ -183,13 +183,6 @@ void MainWindow::setDateTime_Zero()
 }
 
 
-void MainWindow::on_closeButton_clicked()
-{
-    // 終了
-    exit(EXIT_FAILURE);
-}
-
-
 void MainWindow::on_clearButto_clicked()
 {
     // tableWidgetをクリア

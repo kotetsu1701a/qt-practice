@@ -22,8 +22,6 @@ private slots:
 
     void setDateTime_Zero();
 
-    void on_closeButton_clicked();
-
     void on_clearButto_clicked();
 
     void on_calcButton_clicked();
