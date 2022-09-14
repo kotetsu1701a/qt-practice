@@ -38,14 +38,14 @@
    <widget class="QPushButton" name="addButton">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>220</x>
       <y>80</y>
-      <width>80</width>
+      <width>101</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>追加</string>
+     <string>項目の追加</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit">
@@ -61,9 +61,9 @@
    <widget class="QPushButton" name="closeButton">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>220</x>
       <y>250</y>
-      <width>80</width>
+      <width>101</width>
       <height>23</height>
      </rect>
     </property>
@@ -74,22 +74,22 @@
    <widget class="QPushButton" name="deleteButton">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>220</x>
       <y>120</y>
-      <width>80</width>
+      <width>101</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>削除</string>
+     <string>選択項目の削除</string>
     </property>
    </widget>
    <widget class="QPushButton" name="clearButton">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>220</x>
       <y>160</y>
-      <width>80</width>
+      <width>101</width>
       <height>23</height>
      </rect>
     </property>
@@ -132,6 +132,11 @@
       <height>16</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Ubuntu</family>
+     </font>
+    </property>
     <property name="text">
      <string>文字列を入力してみよう</string>
     </property>
@@ -139,5 +144,38 @@
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>clearButton</sender>
+   <signal>clicked()</signal>
+   <receiver>listWidget</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>245</x>
+     <y>174</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>183</x>
+     <y>173</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearButton</sender>
+   <signal>clicked()</signal>
+   <receiver>lineEdit</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>288</x>
+     <y>170</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>147</x>
+     <y>50</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

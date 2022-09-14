@@ -24,9 +24,6 @@ void MainWindow::on_closeButton_clicked()
 
 void MainWindow::on_clearButton_clicked()
 {
-    // すべての項目をクリア
-    ui->lineEdit->clear();                          // LineEditの内容をクリア
-    ui->listWidget->clear();                        // ListWidgetのアイテムをすべて削除
     ui->lineEdit->setFocus();                       // 実行時lineEditにフォーカスをセット
 }
 
@@ -85,4 +82,3 @@ void MainWindow::on_checkBox_stateChanged(int arg1)
     }
     ui->lineEdit->setFocus();                       // 実行時lineEditにフォーカスをセット
 }
-

@@ -16,6 +16,7 @@ public:
     ~MainWindow();
 
 private slots:
+
     void on_closeButton_clicked();
 
     void on_clearButton_clicked();
