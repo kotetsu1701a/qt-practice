@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
-#include <QMessageBox>
 
 double getJulianDay(int year, int month, int day)
 // マイコン天文学Ⅰ（恒星社厚生閣 1983 中野主一著）
@@ -114,9 +113,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     // 行の高さをセット　1行毎に設定する
     // ui->tableWidget->setRowHeight( 0, 20 );
-
-    // 現在の時刻
-    ui->nowRadioButton->setChecked(true);
 
     // 現在の日付と時刻をセット
     setDateTime_Now();
@@ -240,20 +236,6 @@ void MainWindow::on_calcButton_clicked()
     }
 }
 
-
-void MainWindow::on_zeroRadioButton_clicked()
-{
-    // 時刻を０時にする
-    setDateTime_Zero();
-}
-
-
-void MainWindow::on_nowRadioButton_clicked()
-{
-    // 時刻を現在の時刻にする
-    setDateTime_Now();
-}
-
 void MainWindow::on_monthCheckBox_clicked()
 {
     // チェックがDisableであればtableWidgetをクリア
@@ -263,5 +245,18 @@ void MainWindow::on_monthCheckBox_clicked()
         ui->tableWidget->clearContents();
         ui->tableWidget->setRowCount(1);
     }
+}
+
+void MainWindow::on_nowButton_clicked()
+{
+    // 時刻を現在の時刻にする
+    setDateTime_Now();
+}
+
+
+void MainWindow::on_zeroButton_clicked()
+{
+    // 時刻を０時にする
+    setDateTime_Zero();
 }
 

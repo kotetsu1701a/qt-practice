@@ -26,11 +26,11 @@ private slots:
 
     void on_calcButton_clicked();
 
-    void on_zeroRadioButton_clicked();
-
-    void on_nowRadioButton_clicked();
-
     void on_monthCheckBox_clicked();
+
+    void on_nowButton_clicked();
+
+    void on_zeroButton_clicked();
 
 private:
     Ui::MainWindow *ui;

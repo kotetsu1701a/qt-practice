@@ -123,7 +123,7 @@
      <rect>
       <x>70</x>
       <y>20</y>
-      <width>61</width>
+      <width>60</width>
       <height>22</height>
      </rect>
     </property>
@@ -204,7 +204,7 @@
      <rect>
       <x>20</x>
       <y>60</y>
-      <width>91</width>
+      <width>90</width>
       <height>23</height>
      </rect>
     </property>
@@ -218,32 +218,6 @@
       <string>世界時</string>
      </property>
     </item>
-   </widget>
-   <widget class="QRadioButton" name="nowRadioButton">
-    <property name="geometry">
-     <rect>
-      <x>340</x>
-      <y>62</y>
-      <width>81</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>現在時刻</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="zeroRadioButton">
-    <property name="geometry">
-     <rect>
-      <x>430</x>
-      <y>62</y>
-      <width>51</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>0時</string>
-    </property>
    </widget>
    <widget class="QTableWidget" name="tableWidget">
     <property name="geometry">
@@ -352,6 +326,32 @@
     </property>
     <property name="tristate">
      <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="nowButton">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>60</y>
+      <width>71</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>現在時刻</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="zeroButton">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>60</y>
+      <width>31</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>０時</string>
     </property>
    </widget>
   </widget>
