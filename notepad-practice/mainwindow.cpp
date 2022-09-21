@@ -200,11 +200,11 @@ void MainWindow::on_actionFont_triggered()
 void MainWindow::on_actionNotePad_triggered()
 {
     QString about_text;
-    about_text = "NotePad version 0.01\n\n";
-    about_text += "Base on QT Creator 6.3.2 [GCC gcc (Ubuntu 12.1.0-2ubuntu1~22.04) 12.1.0]\n\n";
-    about_text += "Build date: 2022/09/20 14:30\n\n";
+    about_text = "NotePad version 0.02\n\n";
+    about_text += "Base on QT Creator 6.3.2 (GCC 11.2.0-2ubuntu1~22.04)\n\n";
+    about_text += "Build date: 2022/09/21 16:50\n\n";
     about_text += "Lisence: GPL and LGPL\n\n";
     about_text += "This application is written under the GPL v3 and LGPL v3 open source licenses provided by Qt Creator.";
 
-    QMessageBox::about(this, "NotePadについて", about_text);
+    QMessageBox::information(this, "NotePadについて", about_text);
 }
