@@ -54,6 +54,8 @@
     <addaction name="actionDelete"/>
     <addaction name="separator"/>
     <addaction name="actionSelectAll"/>
+    <addaction name="separator"/>
+    <addaction name="actionFont"/>
    </widget>
    <widget class="QMenu" name="menu_Help">
     <property name="title">
@@ -138,7 +140,7 @@
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
-    <string>名前を付けて保存</string>
+    <string>名前を付けて保存...</string>
    </property>
    <property name="toolTip">
     <string>ドキュメントに名前を付けて保存します</string>
@@ -274,6 +276,11 @@
    </property>
    <property name="text">
     <string>NotePadについて</string>
+   </property>
+  </action>
+  <action name="actionFont">
+   <property name="text">
+    <string>フォント設定...</string>
    </property>
   </action>
  </widget>

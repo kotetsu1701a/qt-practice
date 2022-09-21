@@ -4,6 +4,8 @@
 #include <QFileDialog>
 #include <QTextStream>
 #include <QMessageBox>
+#include <QFontDialog>
+#include <QFont>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -20,10 +22,35 @@ MainWindow::~MainWindow()
 }
 
 
+bool MainWindow::saveFlag()
+{
+    if (!ui->textEdit->document()->isModified()) {
+        return true;
+    }
+    QMessageBox::StandardButton ret = QMessageBox::warning(this, QCoreApplication::applicationName(),
+                         tr("ドキュメントが変更されています。\n"
+                            "変更を保存しますか？\n\n"
+                            "保存しない場合は変更した内容が破棄されます。"),
+                         QMessageBox::Save | QMessageBox::Cancel);
+
+    if (ret == QMessageBox::Save) {
+        on_actionSave_triggered();
+        return true;
+    }
+    if (ret == QMessageBox::Cancel) {
+        return false;
+    }
+    return true;
+
+}
+
+
 void MainWindow::on_actionNew_triggered()
 {
-    file_path_ = "";                // 受け渡すパス名をリセット
-    ui->textEdit->setText("");      // 内容を削除する
+    if (saveFlag()) {
+        file_path_ = "";                // 受け渡すパス名をリセット
+        ui->textEdit->setText("");      // 内容を削除する
+    }
 }
 
 
@@ -40,7 +67,7 @@ void MainWindow::on_actionOpen_triggered()
 
         // ファイルの属性と種類をチェック
         if (!file.open(QFile::ReadOnly | QFile::Text)) {
-            QMessageBox::warning(this, "警告", "ファイルを開くことができません");
+            QMessageBox::warning(this, QCoreApplication::applicationName(), tr("警告", "ファイルを開くことができません"));
             return;
         }
 
@@ -73,7 +100,7 @@ void MainWindow::on_actionSave_triggered()
 
     // ファイルの属性と種類をチェック
     if (!file.open(QFile::WriteOnly | QFile::Text)) {
-        QMessageBox::warning(this, "警告", "ファイルを保存することができません");
+        QMessageBox::warning(this, QCoreApplication::applicationName(), tr("警告", "ファイルを保存することができません"));
         return;
     }
 
@@ -99,7 +126,7 @@ void MainWindow::on_actionSaveAs_triggered()
 
         // ファイルの属性と種類をチェック
         if (!file.open(QFile::WriteOnly | QFile::Text)) {
-            QMessageBox::warning(this, "警告", "ファイルを保存することができません");
+            QMessageBox::warning(this, QCoreApplication::applicationName(), tr("警告", "ファイルを保存することができません"));
             return;
         }
 
@@ -115,7 +142,9 @@ void MainWindow::on_actionSaveAs_triggered()
 
 void MainWindow::on_actionQuit_triggered()
 {
-    close();
+    if (saveFlag()) {
+        close();
+    }
 }
 
 
@@ -156,6 +185,18 @@ void MainWindow::on_actionDelete_triggered()
 }
 
 
+void MainWindow::on_actionFont_triggered()
+{
+    bool ok;
+    QFont font = QFontDialog::getFont(&ok, this);
+    if (ok) {
+        ui->textEdit->setFont(font);
+    } else {
+        return;
+    }
+}
+
+
 void MainWindow::on_actionNotePad_triggered()
 {
     QString about_text;
@@ -167,4 +208,3 @@ void MainWindow::on_actionNotePad_triggered()
 
     QMessageBox::about(this, "NotePadについて", about_text);
 }
-

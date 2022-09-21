@@ -40,6 +40,9 @@ private slots:
 
     void on_actionNotePad_triggered();
 
+    void on_actionFont_triggered();
+
+    bool saveFlag();
 
 private:
     Ui::MainWindow *ui;
