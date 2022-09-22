@@ -27,32 +27,34 @@ MainWindow::~MainWindow()
 
 bool MainWindow::saveFlag()
 {
+    // 変更がない場合は何もしない
     if (!ui->textEdit->document()->isModified()) {
         return true;
     }
+
+    // 変更があった場合は、変更せずに破棄するか、キャンセルのみか、保存するかする
     QMessageBox::StandardButton ret = QMessageBox::warning(this, QCoreApplication::applicationName(),
                          tr("ドキュメントが変更されています。\n"
                             "変更を保存しますか？\n\n"
                             "保存しない場合は変更した内容が破棄されます。"),
                          QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
 
-    if (ret == QMessageBox::Save) {
+    if (ret == QMessageBox::Save) {     // 保存
         on_actionSave_triggered();
         return true;
     }
-    if (ret == QMessageBox::Cancel) {
+    if (ret == QMessageBox::Cancel) {   // キャンセル
         return false;
     }
-    return true;
-
+    return true;                        // 破棄
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     if (!saveFlag()) {
-        event->ignore();
+        event->ignore();    // 閉じない
     } else {
-        event->accept();
+        event->accept();    // 閉じる
     }
 }
 
@@ -157,36 +159,42 @@ void MainWindow::on_actionSaveAs_triggered()
 
 void MainWindow::on_actionUndo_triggered()
 {
+    // 最後に実行した操作をもとに戻す
     ui->textEdit->undo();
 }
 
 
 void MainWindow::on_actionRedo_triggered()
 {
+    // 最後に実行しようとした操作をやり直す
     ui->textEdit->redo();
 }
 
 
 void MainWindow::on_actionCut_triggered()
 {
+    // 選択範囲を切り取り
     ui->textEdit->cut();
 }
 
 
 void MainWindow::on_actionCopy_triggered()
 {
+    // 選択範囲をコピー
     ui->textEdit->copy();
 }
 
 
 void MainWindow::on_actionPaste_triggered()
 {
+    // クリップボードから貼り付け
     ui->textEdit->paste();
 }
 
 
 void MainWindow::on_actionDelete_triggered()
 {
+    // カーソルを先頭にセット
     QTextCursor cursor = ui->textEdit->textCursor();
     cursor.removeSelectedText();
 }
@@ -194,6 +202,7 @@ void MainWindow::on_actionDelete_triggered()
 
 void MainWindow::on_actionFont_triggered()
 {
+    // フォントダイアログを呼び出してフォントを設定する
     bool ok;
     QFont font = QFontDialog::getFont(&ok, this);
     if (ok) {
@@ -206,11 +215,13 @@ void MainWindow::on_actionFont_triggered()
 
 void MainWindow::on_actionNotePad_triggered()
 {
+    // アプリケーション情報
     QString about_text;
-    about_text = "NotePad version 0.02\n\n";
+    about_text = "NotePad version 0.0３\n\n";
     about_text += "Base on QT Creator 6.3.2 (GCC 11.2.0-2ubuntu1~22.04)\n\n";
     about_text += "Build date: 2022/09/21 16:50\n\n";
     about_text += "Lisence: GPL and LGPL\n\n";
+    about_text += "Developer: Kepler Code\n\n";
     about_text += "This application is written under the GPL v3 and LGPL v3 open source licenses provided by Qt Creator.";
 
     QMessageBox::information(this, "NotePadについて", about_text);
