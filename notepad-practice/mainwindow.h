@@ -15,6 +15,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
 private slots:
     void on_actionNew_triggered();
 
@@ -23,8 +24,6 @@ private slots:
     void on_actionSave_triggered();
 
     void on_actionSaveAs_triggered();
-
-    void on_actionQuit_triggered();
 
     void on_actionUndo_triggered();
 
@@ -44,8 +43,13 @@ private slots:
 
     bool saveFlag();
 
+
 private:
     Ui::MainWindow *ui;
     QString file_path_;
+
+protected:
+    void closeEvent(QCloseEvent *event);
+
 };
 #endif // MAINWINDOW_H

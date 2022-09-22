@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <QFontDialog>
 #include <QFont>
+#include <QCloseEvent>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -14,11 +15,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     this->setCentralWidget(ui->textEdit);  // TextEditの周囲の隙間をなくす
+    connect(ui->actionQuit, SIGNAL(triggered()), this, SLOT(close()));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+
 }
 
 
@@ -31,7 +34,7 @@ bool MainWindow::saveFlag()
                          tr("ドキュメントが変更されています。\n"
                             "変更を保存しますか？\n\n"
                             "保存しない場合は変更した内容が破棄されます。"),
-                         QMessageBox::Save | QMessageBox::Cancel);
+                         QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
 
     if (ret == QMessageBox::Save) {
         on_actionSave_triggered();
@@ -44,6 +47,14 @@ bool MainWindow::saveFlag()
 
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if (!saveFlag()) {
+        event->ignore();
+    } else {
+        event->accept();
+    }
+}
 
 void MainWindow::on_actionNew_triggered()
 {
@@ -110,6 +121,8 @@ void MainWindow::on_actionSave_triggered()
     out << text;
     file.flush();
     file.close();
+
+    ui->textEdit->document()->setModified(true);
 }
 
 
@@ -136,14 +149,8 @@ void MainWindow::on_actionSaveAs_triggered()
         out << text;
         file.flush();
         file.close();
-    }
-}
 
-
-void MainWindow::on_actionQuit_triggered()
-{
-    if (saveFlag()) {
-        close();
+        ui->textEdit->document()->setModified(true);
     }
 }
 
@@ -208,3 +215,4 @@ void MainWindow::on_actionNotePad_triggered()
 
     QMessageBox::information(this, "NotePadについて", about_text);
 }
+
