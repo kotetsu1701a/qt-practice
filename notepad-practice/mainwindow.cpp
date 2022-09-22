@@ -7,6 +7,10 @@
 #include <QFontDialog>
 #include <QFont>
 #include <QCloseEvent>
+#include <QString>
+#include <QTranslator>
+#include <QApplication>
+#include <QLocale>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -34,10 +38,11 @@ bool MainWindow::saveFlag()
 
     // 変更があった場合は、変更せずに破棄するか、キャンセルのみか、保存するかする
     QMessageBox::StandardButton ret = QMessageBox::warning(this, QCoreApplication::applicationName(),
-                         tr("ドキュメントが変更されています。\n"
-                            "変更を保存しますか？\n\n"
-                            "保存しない場合は変更した内容が破棄されます。"),
-                         QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        tr("<h3>閉じる前に変更した内容を保存しますか？</h3>"
+           "<br>"
+           "保存しない場合は変更した内容が破棄されます。"
+           ),
+        QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
 
     if (ret == QMessageBox::Save) {     // 保存
         on_actionSave_triggered();
@@ -49,8 +54,10 @@ bool MainWindow::saveFlag()
     return true;                        // 破棄
 }
 
+
 void MainWindow::closeEvent(QCloseEvent *event)
 {
+    // ☓ボタンクリックおよびメニューのTriggered時の処理
     if (!saveFlag()) {
         event->ignore();    // 閉じない
     } else {
@@ -58,8 +65,10 @@ void MainWindow::closeEvent(QCloseEvent *event)
     }
 }
 
+
 void MainWindow::on_actionNew_triggered()
 {
+    // 新規作成
     if (saveFlag()) {
         file_path_ = "";                // 受け渡すパス名をリセット
         ui->textEdit->setText("");      // 内容を削除する
@@ -69,6 +78,7 @@ void MainWindow::on_actionNew_triggered()
 
 void MainWindow::on_actionOpen_triggered()
 {
+    // 開く
     // ファイルダイアログを開く
     QString file_name = QFileDialog::getOpenFileName(this, "ファイルを開く");
 
@@ -98,6 +108,7 @@ void MainWindow::on_actionOpen_triggered()
 
 void MainWindow::on_actionSave_triggered()
 {
+    // 保存
     // ファイル名なしで保存しようとする場合はファイルダイアログを開く
     if (file_path_.isEmpty()) {
         QString file_name = QFileDialog::getSaveFileName(this, "別名で保存");
@@ -130,6 +141,7 @@ void MainWindow::on_actionSave_triggered()
 
 void MainWindow::on_actionSaveAs_triggered()
 {
+    // 名前を付けて保存
     // ファイルダイアログを開く
     QString file_name = QFileDialog::getSaveFileName(this, "別名で保存");
 
@@ -217,11 +229,11 @@ void MainWindow::on_actionNotePad_triggered()
 {
     // アプリケーション情報
     QString about_text;
-    about_text = "NotePad version 0.0３\n\n";
-    about_text += "Base on QT Creator 6.3.2 (GCC 11.2.0-2ubuntu1~22.04)\n\n";
-    about_text += "Build date: 2022/09/21 16:50\n\n";
-    about_text += "Lisence: GPL and LGPL\n\n";
-    about_text += "Developer: Kepler Code\n\n";
+    about_text = "<h3><strong>NotePad version 0.0３</strong></h3><br>";
+    about_text += "Base on QT Creator 6.3.2 (GCC 11.2.0-2ubuntu1~22.04)<br><br>";
+    about_text += "Build date: 2022/09/21 16:50<br><br>";
+    about_text += "Lisence: GPL and LGPL<br><br>";
+    about_text += "Developer: Kepler Code<br><br>";
     about_text += "This application is written under the GPL v3 and LGPL v3 open source licenses provided by Qt Creator.";
 
     QMessageBox::information(this, "NotePadについて", about_text);
