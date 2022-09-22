@@ -16,7 +16,17 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QTextEdit" name="textEdit"/>
+     <widget class="QTextEdit" name="textEdit">
+      <property name="font">
+       <font>
+        <family>Noto Sans Mono</family>
+        <pointsize>12</pointsize>
+       </font>
+      </property>
+      <property name="tabStopDistance">
+       <double>40.000000000000000</double>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
